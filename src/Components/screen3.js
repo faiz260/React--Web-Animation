@@ -2,11 +2,17 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import {ReactComponent as Image} from './Images/undraw_code_review_l1q9.svg';
-import useWebAnimations, {heartBeat
-} from "@wellyshen/use-web-animations";
+import useWebAnimations from "@wellyshen/use-web-animations";
 
 const useStyles = makeStyles((theme) => ({
-  screen2: {
+  screenDiv: {
+    backgroundImage: "linear-gradient(-60deg,#4b06c1,#ce02bd)",
+    backgroundSize: "cover",
+    backgroundPosition: "center center",
+    backgroundAttachment: "fixed",
+    maxWidth: '100%'
+  },
+  screen3: {
     backgroundImage: "linear-gradient(-60deg,#5F0A87, #A4508B)",
     backgroundSize: "100%",
     top: 0,
@@ -21,6 +27,8 @@ const useStyles = makeStyles((theme) => ({
   typoDiv: {
     margin: 50,
     width: 600,
+    padding: 20,
+    paddingLeft: 30
   },
   typo1: {
     fontWeight: 500,
@@ -46,31 +54,39 @@ const useStyles = makeStyles((theme) => ({
     width: 500,
     margin: "auto",
     marginTop: 80,
+    padding: 50
   },
 }));
 
 export const Screen3 = () => {
   const classes = useStyles();
-  const { ref} = useWebAnimations({ 
+  const { ref, getAnimation} = useWebAnimations({ 
+    playbackRate: 0.5, 
+    autoPlay: false,
 
-      // ...heartBeat,
     keyframes: [
         
       {transform: "translate(0,0)"},
-      {transform: "translate(0,10px)"},
+      {transform: "translate(0,20px)"},
+      {transform: "translate(0,0)"},
     ],  
     timing: {
-      delay: 500, 
-      duration: 1000, 
-      iterations: Infinity, 
+      duration: 600, 
+      iterations: 1, 
       direction: "alternate",
       easing: "ease-in-out", 
     },
   });
 
 
+const play =  ()=>{
+  getAnimation().play();
+}
+
+
   return (
-    <div className={classes.screen2}>
+    <div className={classes.screenDiv} >
+    <div className={classes.screen3}>
       <div className={classes.typoDiv}>
         <Typography className={classes.typo1}> Website Copywriting </Typography>
         <Typography className={classes.typo2}> 
@@ -87,9 +103,10 @@ export const Screen3 = () => {
             <li className={classes.list}>Sales Letter</li>
         </ul>
       </div>
-      <div ref={ref}>
+      <div ref={ref} onMouseOver={play}>
         <Image className={classes.image} />
       </div>
+    </div>
     </div>
   );
 };

@@ -2,10 +2,16 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import {ReactComponent as Image} from './Images/undraw_design_tools_42tf.svg';
-import useWebAnimations, {rubberBand, bounce
-} from "@wellyshen/use-web-animations"
+import useWebAnimations from "@wellyshen/use-web-animations"
 
 const useStyles = makeStyles((theme) => ({
+  screenDiv: {
+    backgroundImage: "linear-gradient(-60deg,#4b06c1,#ce02bd)",
+    backgroundSize: "cover",
+    backgroundPosition: "center center",
+    backgroundAttachment: "fixed",
+    maxWidth: '100%'
+  },
   screen2: {
     backgroundImage: "linear-gradient(-60deg,#5F0A87, #A4508B)",
     backgroundSize: "100%",
@@ -21,6 +27,8 @@ const useStyles = makeStyles((theme) => ({
   typoDiv: {
     margin: 50,
     width: 500,
+    padding: 20,
+    paddingLeft: 30
   },
   typo1: {
     fontWeight: 500,
@@ -46,32 +54,39 @@ const useStyles = makeStyles((theme) => ({
     width: 500,
     margin: "auto",
     marginTop: 80,
+    padding: 50
   },
 }));
 
 export const Screen2 = () => {
   const classes = useStyles();
-  const { ref} = useWebAnimations({ 
-    //   ...bounce,
+  const { ref, playState, getAnimation} = useWebAnimations({ 
+    playbackRate: 0.5, 
+    autoPlay: false,
     keyframes: [
         
       {transform: "translate(0,0)"},
-      {transform: "translate(10px,0)"},
+      {transform: "translate(15px,0)"},
+      {transform: "translate(0,0)"},
     ],  
     timing: {
-      delay: 500, 
-      duration: 1000, 
-      iterations: Infinity, 
+      duration: 600, 
+      iterations: 1, 
       direction: "alternate",
       easing: "ease-in-out", 
     },
   });
+  const play =  ()=>{
+    getAnimation().play();
+  }
+  console.log(getAnimation())
 
 
   return (
+    <div className={classes.screenDiv}>
     <div className={classes.screen2}>
       <div ref={ref}>
-        <Image className={classes.image} />
+        <Image className={classes.image} onMouseOver={play} />
       </div>
       <div className={classes.typoDiv}>
         <Typography className={classes.typo1}> UX WRITING </Typography>
@@ -87,6 +102,7 @@ export const Screen2 = () => {
             <li className={classes.list}>Prototype</li>
         </ul>
       </div>
+    </div>
     </div>
   );
 };
