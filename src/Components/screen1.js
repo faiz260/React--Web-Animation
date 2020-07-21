@@ -2,20 +2,21 @@ import React from 'react';
 import Typography from "@material-ui/core/Typography";
 import { makeStyles} from "@material-ui/core/styles";
 import {ReactComponent as Image} from './Images/undraw_typewriter_i8xd.svg'
-import useWebAnimations, {rubberBand
+import useWebAnimations, {rubberBand, bounce
 } from "@wellyshen/use-web-animations"
 import "./screen1.css"
 
 const useStyles = makeStyles((theme) => ({
     screen1: {
         backgroundImage: "linear-gradient(-60deg,#4b06c1,#ce02bd)",
-        backgroundSize: "100%",
+        backgroundSize: "cover",
         top: 0,
         width: "100%",
-        height: "700px",
+        height: "100%",
         fontFamily:"'Montserrat', sans-serif",
         color: "white",
         display: 'flex',
+        flexWrap: "wrap",
         justifyContent: 'space-evenly',
     },
     typoDiv:{
@@ -43,23 +44,24 @@ const useStyles = makeStyles((theme) => ({
         marginTop: 80,
         animation: "rubberBand",
         animationDuration: "2s"
-
     }
   }));
 
 export const Screen1 = () => {
   const classes = useStyles();
   const { ref} = useWebAnimations({ 
+    //   ...bounce,
     keyframes: [
+        
       {transform: "translate(0,0)"},
-      {transform: "translate(10px,0)"},
-    ],
+      {transform: "translate(0,10px)"},
+    ],  
     timing: {
-      delay: 500, // Start with a 500ms delay
-      duration: 1000, // Run for 1000ms
-      iterations: Infinity, // Repeat once
-      direction: "alternate", // Run the animation forwards and then backwards
-      easing: "ease-in-out", // Use a fancy timing function
+      delay: 500, 
+      duration: 1000, 
+      iterations: Infinity, 
+      direction: "alternate",
+      easing: "ease-in-out", 
     },
   });
 

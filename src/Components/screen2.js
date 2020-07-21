@@ -1,7 +1,9 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import {ReactComponent as Image} from './Images/undraw_typewriter_i8xd.svg'
+import {ReactComponent as Image} from './Images/undraw_design_tools_42tf.svg';
+import useWebAnimations, {rubberBand, bounce
+} from "@wellyshen/use-web-animations"
 
 const useStyles = makeStyles((theme) => ({
   screen2: {
@@ -9,10 +11,11 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: "100%",
     top: 0,
     width: "100%",
-    height: "700px",
+    height: "100%",
     fontFamily: "'Montserrat', sans-serif",
     color: "white",
     display: "flex",
+    flexWrap: "wrap",
     justifyContent: "space-evenly",
   },
   typoDiv: {
@@ -48,10 +51,26 @@ const useStyles = makeStyles((theme) => ({
 
 export const Screen2 = () => {
   const classes = useStyles();
+  const { ref} = useWebAnimations({ 
+    //   ...bounce,
+    keyframes: [
+        
+      {transform: "translate(0,0)"},
+      {transform: "translate(10px,0)"},
+    ],  
+    timing: {
+      delay: 500, 
+      duration: 1000, 
+      iterations: Infinity, 
+      direction: "alternate",
+      easing: "ease-in-out", 
+    },
+  });
+
 
   return (
     <div className={classes.screen2}>
-      <div>
+      <div ref={ref}>
         <Image className={classes.image} />
       </div>
       <div className={classes.typoDiv}>
